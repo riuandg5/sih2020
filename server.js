@@ -1,8 +1,9 @@
 const PORT = process.env.PORT || 3079;
+let API;
 if (process.env.NODE_ENV !== "production") {
-    const API = require("./config.json");
+    API = require("./config.json");
 } else {
-    const API = {
+    API = {
         username: process.env.USERNAME,
         repository: process.env.REPOSITORY,
         endpoint: process.env.ENDPOINT,
