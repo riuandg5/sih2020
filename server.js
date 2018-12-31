@@ -23,10 +23,14 @@ function problemsFromPage(pageNum) {
     });
 }
 
-app.get("/", async (req, res) => {
-    const problems = await problemsFromPage(1);
-    problemsArray.push(...problems);
+app.get("/", (req, res) => {
     res.render("index", {problems: problemsArray});
+});
+
+app.post("/", async (req, res) => {
+    const problems = await problemsFromPage(req.body.pageNum);
+    problemsArray.push(...problems);
+    res.send(problems);
 });
 
 app.listen(PORT, () => console.log("Server started..."));

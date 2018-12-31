@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=1024">
     <link rel="icon" href="https://www.sih.gov.in/img/favicon-sih.png" type="image/png" sizes="16x16">
     <title>SIH 2019 Problem Statements</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
     <table>
-        <tbody>
+        <tbody id="tbody">
         <% problems.forEach(problem => { %>
             <tr>
                 <td>
@@ -31,5 +32,41 @@
         <% }); %>
         </tbody>
     </table>
+    <script>
+        function getProblems(pageNum) {
+            $.ajax({
+                url: "/",
+                method: "POST",
+                data: {
+                    "pageNum": pageNum
+                }
+            }).done(problems => {
+                problems.forEach(problem => {
+                    const item = $("<tr></tr>");
+                    item.html(`
+                        <td>
+                            <figure>
+                                <img src="${problem.image}">
+                                <figcaption ${problem.organisation}</figcaption>
+                            </figure>
+                        </td>
+                        <td>
+                            <h3>${problem.statement.head}</h3>
+                            <h6>Type: ${problem.statement.type} Field: ${problem.field}</h6>
+                            <p>${problem.statement.description}</p>
+                            <a href="${problem.statement.youtube}">Youtube</a>
+                            <button>Ideas Submitted: ${problem.ideas}</button>
+                            <button>Category: ${problem.category}</button>
+                            <button>Complexity: ${problem.complexity}</button>
+                            <p>Created at: ${problem.statement.created} Updated at: ${problem.statement.updated}</p>
+                        </td>
+                    `);
+                    $("#tbody").append(item);
+                });
+                console.log("Scraped page " + pageNum);
+            });
+        }
+        $(window).ready(() => getProblems(1));
+    </script>
 </body>
 </html>
