@@ -33,6 +33,7 @@
         </tbody>
     </table>
     <script>
+    <% if (pageNum + 1 <= totalPages) { %>
         function getProblems(pageNum) {
             $.ajax({
                 url: "/",
@@ -64,9 +65,13 @@
                     $("#tbody").append(item);
                 });
                 console.log("Scraped page " + pageNum);
+                if (pageNum + 1 <= <%= totalPages %>) {
+                    getProblems(pageNum + 1);
+                }
             });
         }
-        $(window).ready(() => getProblems(1));
+        $(window).ready(() => getProblems(<%= pageNum %>));
+    <% } %>
     </script>
 </body>
 </html>

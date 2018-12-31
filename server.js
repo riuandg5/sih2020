@@ -8,6 +8,7 @@ app.use(bp.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 
 const problemsArray = [];
+let page = 0;
 
 function problemsFromPage(pageNum) {
     return new Promise(async resolve => {
@@ -24,7 +25,7 @@ function problemsFromPage(pageNum) {
 }
 
 app.get("/", (req, res) => {
-    res.render("index", {problems: problemsArray});
+    res.render("index", {problems: problemsArray, pageNum: page + 1, totalPages: API.totalPages});
 });
 
 app.post("/", async (req, res) => {
