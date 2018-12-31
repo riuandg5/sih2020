@@ -9,7 +9,23 @@ app.set("view engine", "ejs");
 
 const problemsArray = [];
 
-app.get("/", (req, res) => {
+function problemsFromPage(pageNum) {
+    return new Promise(async resolve => {
+        const body = await rpn({
+            uri: `https://wrapapi.com/use/${API.username}/${API.repository}/${API.endpoint}/latest`,
+            qs: {
+                pageNum,
+                wrapAPIKey: API.key
+            },
+            json: true
+        });
+        body.success ? resolve(body.data[Object.keys(body.data)[0]]) : problemsFromPage(pageNum);
+    });
+}
+
+app.get("/", async (req, res) => {
+    const problems = await problemsFromPage(1);
+    problemsArray.push(...problems);
     res.render("index", {problems: problemsArray});
 });
 
