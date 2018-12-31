@@ -145,6 +145,8 @@
                     <button type="button" class="btn <%= problem.complexity %>">Complexity: <%= problem.complexity %></button>
                     <p class="text-muted mt-3">Created at: <%= problem.statement.created %>&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspUpdated at: <%= problem.statement.updated %></p>
                 </td>
+                <td class="search" style="display: none;"><%= problem.field %> <%= problem.category %> <%= problem.complexity %> <%= problem.field %> <%= problem.complexity %></td>
+                <td class="moreinfo" style="display: none;"><%= problem.organisation %> <%= problem.statement.head %> <%= problem.statement.type %> <%= problem.statement.description %> ideas<%= problem.ideas %></td>
             </tr>
         <% }); %>
         </tbody>
@@ -153,6 +155,26 @@
         <div id="preloader"><img src="https://www.sih.gov.in/img/logo.png"></div>
     <% } %>
     <script>
+        function searchFunction() {
+            let field = $("#field"), category = $("#category"), complexity = $("#complexity"), moreinfo = $("#moreinfo"), problems = $("tr");
+            if (!field.val() && !category.val() && !complexity.val()) {
+                [...problems].forEach(problem => {
+                    if ($(problem).find(".moreinfo").text().toUpperCase().indexOf(moreinfo.val().toUpperCase()) > -1 ){
+                        $(problem).css("display", "");
+                    } else {
+                        $(problem).css("display", "none");
+                    }
+                });
+            } else {
+                [...problems].forEach(problem => {
+                    if ($(problem).find(".search").text().toUpperCase().indexOf(field.val().toUpperCase()+category.val().toUpperCase()+complexity.val().toUpperCase()) > -1 ){
+                        $(problem).css("display", "");
+                    } else {
+                        $(problem).css("display", "none");
+                    }
+                });
+            }
+        }
     <% if (pageNum + 1 <= totalPages) { %>
         function getProblems(pageNum) {
             $.ajax({
@@ -184,6 +206,8 @@
                             <button type="button" class="btn ${problem.complexity}">Complexity: ${problem.complexity}</button>
                             <p class="text-muted mt-3">Created at: ${problem.statement.created}&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbspUpdated at: ${problem.statement.updated}</p>
                         </td>
+                        <td class="search" style="display: none;">${problem.field} ${problem.category} ${problem.complexity} ${problem.field} ${problem.complexity}</td>
+                        <td class="moreinfo" style="display: none;">${problem.organisation} ${problem.statement.head} ${problem.statement.type} ${problem.statement.description} ideas${problem.ideas}</td>
                     `);
                     $("#tbody").append(item);
                 });
@@ -191,6 +215,7 @@
                     $("#preloader").css({"opacity": "0", "visibility": "hidden"});
                 <% } %>
                 console.log("Scraped page " + pageNum);
+                searchFunction();
                 if (pageNum + 1 <= <%= totalPages %>) {
                     getProblems(pageNum + 1);
                 }
