@@ -1,5 +1,15 @@
 const PORT = process.env.PORT || 3079;
-const API  = process.env.NODE_ENV !== "production" ? require("./config.json") : process.env.API;
+if (process.env.NODE_ENV !== "production") {
+    const API = require("./config.json");
+} else {
+    const API = {
+        username: process.env.USERNAME,
+        repository: process.env.REPOSITORY,
+        endpoint: process.env.ENDPOINT,
+        key: process.env.KEY,
+        totalPages: process.env.TOTALPAGES
+    }
+}
 const rpn  = require("request-promise-native");
 const bp   = require("body-parser");
 const app  = require("express")();
