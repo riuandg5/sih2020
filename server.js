@@ -7,8 +7,10 @@ const app  = require("express")();
 app.use(bp.urlencoded({extended: true}));
 app.set("view engine", "ejs");
 
+const problemsArray = [];
+
 app.get("/", (req, res) => {
-    res.send("Hello SIH 2019");
+    res.render("index", {problems: problemsArray});
 });
 
 app.listen(PORT, () => console.log("Server started..."));
