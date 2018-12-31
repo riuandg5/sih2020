@@ -8,6 +8,50 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <style>
+        #preloader {
+            position: fixed;
+            top: 0;
+            z-index: 999999;
+            opacity: 1;
+            visibility: visible;
+            -webkit-transition: opacity 1s, visibility 1s;
+            -o-transition: opacity 1s, visibility 1s;
+            transition: opacity 1s, visibility 1s;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            width: 100vw;
+            height: 100vh;
+            -webkit-box-pack: center;
+                -ms-flex-pack: center;
+                    justify-content: center;
+            -webkit-box-align: center;
+                -ms-flex-align: center;
+                    align-items: center;
+            background-color: white;
+        }
+        #preloader img {
+            -webkit-animation: breathe ease-in-out 1s infinite alternate;
+                    animation: breathe ease-in-out 1s infinite alternate;
+        }
+        @-webkit-keyframes breathe {
+            0% {
+                -webkit-transform: scale(0.8);
+                        transform: scale(0.8);
+            } 100% {
+                -webkit-transform: scale(1.2);
+                        transform: scale(1.2);
+            }
+        }
+        @keyframes breathe {
+            0% {
+                -webkit-transform: scale(0.8);
+                        transform: scale(0.8);
+            } 100% {
+                -webkit-transform: scale(1.2);
+                        transform: scale(1.2);
+            }
+        }
         .btn.Simple {
             color: #fff;
             background-color: #28a745;
@@ -105,6 +149,9 @@
         <% }); %>
         </tbody>
     </table>
+    <% if (pageNum === 1) { %>
+        <div id="preloader"><img src="https://www.sih.gov.in/img/logo.png"></div>
+    <% } %>
     <script>
     <% if (pageNum + 1 <= totalPages) { %>
         function getProblems(pageNum) {
@@ -140,6 +187,9 @@
                     `);
                     $("#tbody").append(item);
                 });
+                <% if (pageNum === 1) { %>
+                    $("#preloader").css({"opacity": "0", "visibility": "hidden"});
+                <% } %>
                 console.log("Scraped page " + pageNum);
                 if (pageNum + 1 <= <%= totalPages %>) {
                     getProblems(pageNum + 1);
