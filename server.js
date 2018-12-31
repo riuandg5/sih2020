@@ -35,4 +35,10 @@ app.post("/", async (req, res) => {
     res.send(problems);
 });
 
+app.get("/update", (req, res) => {
+    problemsArray.length = 0;
+    page = 0;
+    res.redirect("/");
+});
+
 app.listen(PORT, () => console.log("Server started..."));
