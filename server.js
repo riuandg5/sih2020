@@ -31,6 +31,7 @@ app.get("/", (req, res) => {
 app.post("/", async (req, res) => {
     const problems = await problemsFromPage(req.body.pageNum);
     problemsArray.push(...problems);
+    page += 1;
     res.send(problems);
 });
 
