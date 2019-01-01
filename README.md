@@ -1,7 +1,7 @@
 # sih2019
 Smart India Hackathon 2019 Problem Statements
 
-## See my instance of app on Heroku
+## See my instance of app on [Heroku](https://sih19.herokuapp.com)
 
 ## Steps to run your own instance of app
 ### 1. `git clone git@github.com:riuandg5/sih2019.git`
