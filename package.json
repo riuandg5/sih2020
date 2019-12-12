@@ -1,7 +1,7 @@
 {
-  "name": "sih2019",
-  "version": "1.0.0",
-  "description": "smart india hackathon 2019 problem statements",
+  "name": "sih2020",
+  "version": "2.0.0",
+  "description": "smart india hackathon 2020 problem statements",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -9,14 +9,14 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/riuandg5/sih2019.git"
+    "url": "git+https://github.com/riuandg5/sih2020.git"
   },
   "author": "Rishu Anand <https://github.com/riuandg5>",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/riuandg5/sih2019/issues"
+    "url": "https://github.com/riuandg5/sih2020/issues"
   },
-  "homepage": "https://github.com/riuandg5/sih2019#readme",
+  "homepage": "https://github.com/riuandg5/sih2020#readme",
   "dependencies": {
     "body-parser": "^1.18.3",
     "ejs": "^2.6.1",
