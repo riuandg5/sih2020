@@ -20,7 +20,7 @@ Smart India Hackathon 2020 Problem Statements
     REPOSITORY = your wrapapi repository name
     ENDPOINT = repository's endpoint name
     KEY = your wrapapi key
-    TOTALPAGES = 23
+    TOTALPAGES = 36
 ```
 
 ```json
@@ -30,7 +30,7 @@ Smart India Hackathon 2020 Problem Statements
   "repository": "your wrapapi repository name",
   "endpoint": "repository's endpoint name",
   "key": "your wrapapi key",
-  "totalPages": 23
+  "totalPages": 36
 }
 ```
 
